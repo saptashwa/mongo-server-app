@@ -137,3 +137,34 @@ exports.updateUserStatus = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateUserDetails = async (req, res, next) => {
+  // userid
+  // property -> property name : propertyValue
+  // api/user/update/:id
+  // [{propertyName: property, propValue: value}]
+  const userId = req.params.id;
+  try {
+    const user = await User.findById(userId, {password: 0});
+    if (!user) {
+      const error = new Error('User not found');
+      error.statusCode = 404;
+      throw error;
+    }
+    const propertyValueArray = req.body;
+    propertyValueArray.forEach(propertyValue => {
+      if (propertyValue.propName.includes('userRole')) {
+        user.userRole[propertyValue.propName.split('.')[1]] = propertyValue.propValue;
+      } else {
+        user[propertyValue.propName] = propertyValue.propValue;
+      }
+    });
+    await user.save();
+    res.status(200).json({ data: user, message: 'User Details Updated' });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+}

@@ -17,7 +17,7 @@ router.get('', authMiddleware, userController.getAllUsers);
 router.get('/:id', userController.getUserById);
 
 // API endpoint for updating user details (only accessible by authenticated users)
-// router.patch('/update', authMiddleware, userController.updateUserDetails);
+router.put('/update/:id', authMiddleware, userController.updateUserDetails);
 
 // API endpoint for deleting user by id (only accessible by admin users)
 // router.delete('/:id', authMiddleware, adminMiddleware, userController.deleteUserById);
