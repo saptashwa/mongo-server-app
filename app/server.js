@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+// const serverless = require('serverless-http');
 const cors = require('cors');
 require('dotenv').config();
 const database = require('./config/database');
@@ -28,9 +29,15 @@ app.use('/api/jobs', jobRoutes);
 app.use('/api/jobseekers', jobseekerRoutes);
 app.use('/api/recruiters', recruiterRoutes);
 
+// app.use('/.netlify/functions/server', userRoutes);  // path must route to lambda
+// app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
+
+// module.exports = app;
+// module.exports.handler = serverless(app);
 // start server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   database.start();
   console.log(`Server listening on port ${port}`);
 });
+

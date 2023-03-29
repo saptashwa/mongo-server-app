@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "live_start": "nodemon --exec \"npm run start\"",
-    "start": "node --max_old_space_size=8192 --max-http-header-size=1000000 server.js"
+    "start": "node --max_old_space_size=8192 --max-http-header-size=1000000 ./app/server.js",
+    "deploy": "netlify deploy --prod"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "express-validator": "^6.15.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.2",
+    "netlify-cli": "^13.2.2",
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
@@ -27,6 +29,7 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
+    "serverless-http": "^3.2.0",
     "socket.io": "^4.6.1",
     "swagger-ui-express": "^4.6.2",
     "winston": "^3.8.2"
